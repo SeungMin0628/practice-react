@@ -49,7 +49,7 @@ const SearchPresenter = ({ movieResults, tvResults, searchQuery, error, loading,
               <Poster
                 key={show.id}
                 id={show.id}
-                imgUrl={show.poster_name}
+                imgUrl={show.poster_path}
                 rating={show.vote_average}
                 title={show.original_name}
                 year={show.first_air_date && show.first_air_date.substring(0, 4)}
