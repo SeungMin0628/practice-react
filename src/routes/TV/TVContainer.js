@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TVPresenter from './TVPresenter'
+import { TVApi } from 'api'
 
 const TVContainer = () => {
-  const [topRated] = React.useState(null)
-  const [popular] = React.useState(null)
-  const [airingToday] = React.useState(null)
-  const [error] = React.useState(null)
-  const [loading] = React.useState(true)
+  const [topRated, setTopRated] = useState(null)
+  const [popular, setPopular] = useState(null)
+  const [airingToday, setAiringToday] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  const pullDatas = async () => {
+    try {
+      const { data: { results: topRated } } = await TVApi.topRated()
+      const { data: { results: popular } } = await TVApi.popular()
+      const { data: { results: airingToday } } = await TVApi.airingToday()
+      setTopRated(topRated)
+      setPopular(popular)
+      setAiringToday(airingToday)
+    } catch {
+      setError("Can't find TV shows information.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    pullDatas()
+  }, [])
 
   return(
     <TVPresenter
