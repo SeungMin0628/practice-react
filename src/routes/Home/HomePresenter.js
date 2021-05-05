@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import Section from 'components/Section'
 import Loader from 'components/Loader'
+import Message from 'components/Message'
 
 const Container = styled.div`
-  padding: 0 10px;
+  padding: 0 20px;
 `
 
 const HomePresenter = ({ nowPlaying, upcoming, popular, error, loading }) =>
@@ -26,6 +27,7 @@ const HomePresenter = ({ nowPlaying, upcoming, popular, error, loading }) =>
           {popular.map(movie => <span key={movie.id}>{movie.title}</span>)}
         </Section>
       )}
+      {error && <Message color="#e74c3c" text={error} />}
     </Container>
   )
 

@@ -5,11 +5,17 @@ import { MoviesApi, TVApi } from 'api'
 const SearchContainer = () => {
   const [movieResults, setMovieResults] = useState(null)
   const [tvResults, setTvResults] = useState(null)
-  const [searchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = () => {
+  const updateSearchQuery = (event) => {
+    const { target: { value: searchQuery } } = event
+    setSearchQuery(searchQuery)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
     if (searchQuery !== "") {
       search(searchQuery)
     }
@@ -38,6 +44,7 @@ const SearchContainer = () => {
       error={error}
       loading={loading}
       handleSubmit={handleSubmit}
+      updateSearchQuery={updateSearchQuery}
     />
   )
 }

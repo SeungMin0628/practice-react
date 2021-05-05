@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import Section from 'components/Section'
 import Loader from 'components/Loader'
+import Message from 'components/Message'
 
 const Container = styled.div`
-  padding: 0 10px;
+  padding: 0 20px;
 `
 
 const TVPresenter = ({ topRated, airingToday, popular, error, loading }) =>
@@ -13,19 +14,20 @@ const TVPresenter = ({ topRated, airingToday, popular, error, loading }) =>
     <Container>
       {topRated && topRated.length > 0 && (
         <Section title="Top Rated Shows">
-          {topRated.map(show => <span id={show.id}>{show.name}</span>)}
+          {topRated.map(show => <span key={show.id}>{show.name}</span>)}
         </Section>
       )}
       {popular && popular.length > 0 && (
         <Section title="Popular Shows">
-          {popular.map(show => <span id={show.id}>{show.name}</span>)}
+          {popular.map(show => <span key={show.id}>{show.name}</span>)}
         </Section>
       )}
       {airingToday && airingToday.length > 0 && (
         <Section title="Airing Today">
-          {airingToday.map(show => <span id={show.id}>{show.name}</span>)}
+          {airingToday.map(show => <span key={show.id}>{show.name}</span>)}
         </Section>
       )}
+      {error && <Message color="#e74c3c" text={error} />}
     </Container>
   )
 
