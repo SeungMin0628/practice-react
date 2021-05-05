@@ -19,7 +19,7 @@ export const TVApi = {
       }
     }),
   search: (query) =>
-    api.get('search/movie', {
+    api.get('search/tv', {
       params: {
         query: query
       }
