@@ -86,22 +86,22 @@ const DetailYear = ({result: {release_date, first_air_date}}) => {
 
 const DetailRunTime = ({result: { runtime, episode_run_time}}) => {
   const getRunTime = () => {
-    if (runtime) {
+    let time = runtime || episode_run_time[0]
+
+    if (time) {
       let result = []
       let hours = 0
-      if (runtime >= 60) {
-        hours = parseInt(runtime / 60)
+      if (time >= 60) {
+        hours = parseInt(time / 60)
         result.push(`${hours} ${hours > 1 ? 'hours' : 'hour'}`)
       }
 
-      const minutes = runtime - hours * 60
+      const minutes = time - hours * 60
       if (minutes > 0) {
         result.push(`${minutes} ${minutes > 1 ? 'mins' : 'min'}`)
       }
 
       return result.join(' ')
-    } else if (episode_run_time && episode_run_time.length > 0) {
-      return `${episode_run_time[0]} mins`
     } else {
       return 'Unknown'
     }
