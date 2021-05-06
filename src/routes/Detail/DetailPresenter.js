@@ -318,7 +318,6 @@ const DetailPresenter = ({ result, error, loading }) =>
     <Container>
       {result && (
         <HelmetProvider>
-          {console.log(result)}
           <Helmet>
             <title>{getTitle(result)} | Nomflix</title>
           </Helmet>
