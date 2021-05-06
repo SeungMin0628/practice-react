@@ -205,7 +205,7 @@ const DetailRunTime = ({result: { runtime, episode_run_time}}) => {
   )
 }
 
-const getTitle = (result) => result.original_title || result.original_name
+const getTitle = (result) => result.title || result.name
 
 const DetailPresenter = ({ result, error, loading }) =>
   loading ? <Loader /> : (
