@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import Header from './Header'
 import Home from '../routes/Home'
 import TV from '../routes/TV'
@@ -8,7 +8,7 @@ import Detail from 'routes/Detail'
 import Collection from 'routes/Collection'
 
 const Router = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Header />
     <Switch>
       <Route path="/" exact component={Home} />
@@ -19,7 +19,7 @@ const Router = () => (
       <Route path="/collection/:id" component={Collection} />
       <Redirect from="*" to="/" />
     </Switch>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default Router;
