@@ -40,7 +40,7 @@ const Header = withRouter(({location: { pathname }}) => (
   <SHeader>
     <List>
       <Item current={pathname === '/'}>
-        <SLink to="/">Home</SLink>
+        <SLink to="/">Movies</SLink>
       </Item>
       <Item current={pathname === '/tv'}>
         <SLink to="/tv">TV shows</SLink>

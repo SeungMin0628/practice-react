@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Loader from 'components/Loader'
 import DefaultPoster from 'assets/images/default_poster.jpeg'
+import Message from 'components/Message'
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -112,29 +114,38 @@ const DetailRunTime = ({result: { runtime, episode_run_time}}) => {
   )
 }
 
+const getTitle = (result) => result.original_title || result.original_name
 
 const DetailPresenter = ({ result, error, loading }) =>
   loading ? <Loader /> : (
     <Container>
-      <Backdrop imgUrl={ result.backdrop_path ? `https://image.tmdb.org/t/p/original${result.backdrop_path}` : null } />
-      <Content>
-        <Cover imgUrl= { result.poster_path ? `https://image.tmdb.org/t/p/original${result.poster_path}` : DefaultPoster } />
-        <Data>
-          <Title>{result.original_title ? result.original_title : result.original_name}</Title>
-          <DetailsContainer>
-            <DetailYear result={result} />
-            <Divider>·</Divider>
-            <DetailRunTime result={result} />
-            <Divider>·</Divider>
-            <Detail>
-              {result.genres.map((genre, index) =>
-                index === result.genres.length - 1 ? genre.name : `${genre.name} / `
-              )}
-            </Detail>
-          </DetailsContainer>
-          <Overview>{result.overview}</Overview>
-        </Data>
-      </Content>
+      {result && (
+        <HelmetProvider>
+          <Helmet>
+            <title>{getTitle(result)} | Nomflix</title>
+          </Helmet>
+          <Backdrop imgUrl={ result.backdrop_path ? `https://image.tmdb.org/t/p/original${result.backdrop_path}` : null } />
+          <Content>
+            <Cover imgUrl= { result.poster_path ? `https://image.tmdb.org/t/p/original${result.poster_path}` : DefaultPoster } />
+            <Data>
+              <Title>{getTitle(result)}</Title>
+              <DetailsContainer>
+                <DetailYear result={result} />
+                <Divider>·</Divider>
+                <DetailRunTime result={result} />
+                <Divider>·</Divider>
+                <Detail>
+                  {result.genres.map((genre, index) =>
+                    index === result.genres.length - 1 ? genre.name : `${genre.name} / `
+                  )}
+                </Detail>
+              </DetailsContainer>
+              <Overview>{result.overview}</Overview>
+            </Data>
+          </Content>
+        </HelmetProvider>
+      )}
+      {error && <Message text={error} color="#e74c3c" />}
     </Container>
   )
 
