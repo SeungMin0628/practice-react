@@ -103,6 +103,11 @@ const STab = styled(Tab)`
 `
 
 const STabPanel = styled(TabPanel)`
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 50px - 100px - 32px - 52px - 56px);
+  overflow-y: auto;
+
   ${({selected}) => selected && `
     padding: 10px;
     border-radius: 10px;
@@ -129,6 +134,20 @@ const Video = styled.iframe`
 `
 
 const Productions = styled.div``
+
+const SeasonsContainer = styled.div`
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: repeat(auto-fill, 400px);
+  grid-gap: 10px;
+  margin-top: 10px;
+`
+
+const SmallHeading = styled.h3`
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+`
 
 const Production = ({name, logoPath = null, countryCode = null}) => {
   const Container = styled.div`
@@ -240,6 +259,58 @@ const Collection = ({id, name, posterPath}) => {
   )
 }
 
+const Season = ({season: {air_date, name, overview, poster_path}}) => {
+  const Container = styled.div`
+    display: flex;
+    height: 120px;
+  `
+
+  const Poster = styled.div`
+    width: 100px;
+    background-image: url(${props => props.imgUrl});
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  `
+
+  const Data = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    flex-grow: 1;
+  `
+
+  const Name = styled.h4`
+    font-size: 14px;
+    font-weight: 600;
+  `
+
+  const Detail = styled.p`
+    margin-top: 10px;
+    margin-bottom: 10px;
+  `
+
+  const Overview = styled.p`
+    opacity: 0.7;
+    width: 300px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+  `
+
+  return(
+    <Container>
+      <Poster imgUrl={poster_path ? `https://image.tmdb.org/t/p/w300${poster_path}` : DefaultPoster} />
+      <Data>
+        <Name>{name}</Name>
+        <Detail>Air Date: {air_date || 'Unknown'}</Detail>
+        <Overview>{overview}</Overview>
+      </Data>
+    </Container>
+  )
+}
+
 const getTitle = (result) => result.title || result.name
 
 const DetailPresenter = ({ result, error, loading }) =>
@@ -247,6 +318,7 @@ const DetailPresenter = ({ result, error, loading }) =>
     <Container>
       {result && (
         <HelmetProvider>
+          {console.log(result)}
           <Helmet>
             <title>{getTitle(result)} | Nomflix</title>
           </Helmet>
@@ -290,6 +362,16 @@ const DetailPresenter = ({ result, error, loading }) =>
                       posterPath={result.belongs_to_collection.poster_path}
                     />
                   )}
+                  {result.seasons &&
+                    <>
+                      <SmallHeading>Seasons</SmallHeading>
+                      <SeasonsContainer>
+                        {result.seasons.map(season =>
+                          <Season key={season.id} season={season} />
+                        )}
+                      </SeasonsContainer>
+                    </>
+                  }
                 </STabPanel>
 
                 {result.videos.results && result.videos.results.length > 0 && (

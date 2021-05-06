@@ -26,4 +26,4 @@ Learning React
 - [x] Tabs inside of Movie / TV shows details (Youtube videos, Production company & countries)
 - [x] Collection link
 - [x] Collection routes
-- [ ] On TV show, show seasons and creators
+- [x] On TV show, show seasons and creators
