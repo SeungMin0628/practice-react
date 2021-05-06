@@ -63,7 +63,6 @@ const CollectionPresenter = ({ result, error, loading }) =>
     <Container>
       {result &&
         <Content>
-          {console.log(result)}
           <HelmetProvider>
             <Helmet>
               <title>{result.name || ""} | Nomflix</title>
