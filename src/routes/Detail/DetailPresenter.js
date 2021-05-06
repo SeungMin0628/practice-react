@@ -84,7 +84,9 @@ const STab = styled(Tab)`
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  border-bottom: 3px solid rgba(108, 92, 231, 0);
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(52, 152, 219, 0);
   color: rgba(255, 255, 255, 0.65);
 
   &:hover{
@@ -93,7 +95,7 @@ const STab = styled(Tab)`
 
   ${({selected}) => selected && `
     color: white;
-    border-bottom: 3px solid rgba(108, 92, 231, 1);
+    border-bottom-color: rgba(52, 152, 219, 1);
     background-color: rgba(255, 255, 255, 0.2);
   `}
 
