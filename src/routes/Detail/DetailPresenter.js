@@ -10,7 +10,7 @@ import Section from 'components/Section'
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-  height: calc(100vh - 50px);
+  height: calc(100vh - 90px);
   width: 100%;
   padding: 50px;
   position: relative;

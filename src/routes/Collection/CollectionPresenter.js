@@ -9,7 +9,9 @@ import Poster from 'components/Poster'
 
 const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 90px);
+  padding: 50px;
+  position: relative;
 `
 
 const BackDrop = styled.div`
@@ -17,18 +19,18 @@ const BackDrop = styled.div`
   background-image: url(${props => props.imgUrl});
   background-size: cover;
   background-position: center center;
-  top: 50px;
+  top: 0;
   left: 0;
-  width: 100vw;
-  height: calc(100vh - 50px);
+  width: 100%;
+  height: 100%;
   opacity: 0.5;
   z-index: -10;
+  filter: blur(3px);
 `
 
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  padding: 50px;
   display: flex;
 `
 

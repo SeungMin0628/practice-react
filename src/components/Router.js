@@ -6,6 +6,7 @@ import TV from '../routes/TV'
 import Search from '../routes/Search'
 import Detail from 'routes/Detail'
 import Collection from 'routes/Collection'
+import Footer from './Footer';
 
 const Router = () => (
   <HashRouter>
@@ -19,6 +20,7 @@ const Router = () => (
       <Route path="/collection/:id" component={Collection} />
       <Redirect from="*" to="/" />
     </Switch>
+    <Footer />
   </HashRouter>
 )
 
