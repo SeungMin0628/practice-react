@@ -59,6 +59,15 @@ const DetailsContainer = styled.div`
 
 const Detail = styled.span``
 
+const IMDbLink = styled.a`
+  color: #fdcb6e;
+  font-weight: bold;
+
+  &:hover {
+    color: #ffeaa7;
+  }
+`
+
 const Divider = styled.span`
   margin: 0 10px;
 `
@@ -133,6 +142,14 @@ const DetailPresenter = ({ result, error, loading }) =>
                 <DetailYear result={result} />
                 <Divider>·</Divider>
                 <DetailRunTime result={result} />
+                { result.imdb_id && (
+                  <>
+                <Divider>·</Divider>
+                <Detail>
+                      <IMDbLink href={`https://www.imdb.com/title/${result.imdb_id}`} target="_blank" rel="noreferrer">IMDb</IMDbLink>
+                    </Detail>
+                  </>
+                )}
                 <Divider>·</Divider>
                 <Detail>
                   {result.genres.map((genre, index) =>

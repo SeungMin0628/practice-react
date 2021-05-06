@@ -19,3 +19,11 @@ Learning React
 - [x] TV show Detail
 - [x] Movie Detail
 - [x] Search (TV, Movies)
+
+## Code Challanges
+
+- [x] IMDB Link
+- [ ] Tabs inside of Movie / TV shows details (Youtube videos, Production company & countries)
+- [ ] Collection link
+- [ ] Collection routes
+- [ ] On TV show, show seasons and creators
