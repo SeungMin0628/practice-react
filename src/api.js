@@ -44,3 +44,7 @@ export const MoviesApi = {
       }
     })
 }
+
+export const CollectionApi = {
+  getDetails: (id) => api.get(`collection/${id}`)
+}

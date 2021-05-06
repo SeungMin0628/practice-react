@@ -7,6 +7,7 @@ import Loader from 'components/Loader'
 import DefaultPoster from 'assets/images/default_poster.jpeg'
 import Message from 'components/Message'
 import Section from 'components/Section'
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -205,6 +206,38 @@ const DetailRunTime = ({result: { runtime, episode_run_time}}) => {
   )
 }
 
+const Collection = ({id, name, posterPath}) => {
+  const Container = styled.div`
+    width: 300px;
+    margin-top: 20px;
+  `
+
+  const Name = styled.h3`
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  `
+
+  const SLink = styled(Link)`
+    &:hover {
+      filter: brightness(1.5)
+    }
+  `
+
+  const Poster = styled.img`
+    border-radius: 5px;
+  `
+
+  return (
+    <Container>
+        <Name>{name}</Name>
+        <SLink to={`/collection/${id}`}>
+          <Poster src={posterPath ? `https://image.tmdb.org/t/p/w300${posterPath}` : DefaultPoster} />
+        </SLink>
+    </Container>
+  )
+}
+
 const getTitle = (result) => result.title || result.name
 
 const DetailPresenter = ({ result, error, loading }) =>
@@ -248,6 +281,13 @@ const DetailPresenter = ({ result, error, loading }) =>
 
                 <STabPanel>
                   <Overview>{result.overview}</Overview>
+                  {result.belongs_to_collection && (
+                    <Collection
+                      id={result.belongs_to_collection.id}
+                      name={result.belongs_to_collection.name}
+                      posterPath={result.belongs_to_collection.poster_path}
+                    />
+                  )}
                 </STabPanel>
 
                 {result.videos.results && result.videos.results.length > 0 && (
