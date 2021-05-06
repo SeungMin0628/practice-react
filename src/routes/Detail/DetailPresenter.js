@@ -149,22 +149,13 @@ const SmallHeading = styled.h3`
   margin-top: 15px;
 `
 
-const Production = ({name, logoPath = null, countryCode = null}) => {
+const Production = ({name, imagePath = null, countryCode = null}) => {
   const Container = styled.div`
     position: relative;
   `
 
-  const Logo = styled.div`
+  const Image = styled.div`
     height: 150px;
-    background-image: url(${props => props.imgUrl});
-    background-position: center center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-bottom: 3px;
-  `
-
-  const ContryFlag = styled.div`
-    height: 80px;
     background-image: url(${props => props.imgUrl});
     background-position: center center;
     background-size: contain;
@@ -176,8 +167,8 @@ const Production = ({name, logoPath = null, countryCode = null}) => {
 
   return (
     <Container>
-      {logoPath && <Logo imgUrl={`https://image.tmdb.org/t/p/w300${logoPath}`} />}
-      {countryCode && <ContryFlag imgUrl={`https://www.countryflags.io/${countryCode}/flat/64.png`} />}
+      {imagePath && <Image imgUrl={`https://image.tmdb.org/t/p/w300${imagePath}`} />}
+      {countryCode && <Image imgUrl={`https://www.countryflags.io/${countryCode}/flat/64.png`} />}
       <Name>{name}</Name>
     </Container>
   )
@@ -349,7 +340,7 @@ const DetailPresenter = ({ result, error, loading }) =>
                 <STabList>
                   <STab>Overview</STab>
                   {result.videos.results && result.videos.results.length > 0 && <STab>Videos</STab>}
-                  <STab>Production companies & countries</STab>
+                  <STab>Produced by</STab>
                 </STabList>
 
                 <STabPanel>
@@ -393,16 +384,23 @@ const DetailPresenter = ({ result, error, loading }) =>
                 <STabPanel>
                   <Productions>
                     {result.production_companies && result.production_companies.length > 0 && (
-                      <Section title="Production companies">
+                      <Section title="Companies">
                         {result.production_companies.map(company =>
-                          <Production key={company.id} logoPath={company.logo_path} name={company.name} />
+                          <Production key={company.id} imagePath={company.logo_path} name={company.name} />
                         )}
                       </Section>
                     )}
                     {result.production_countries && result.production_countries.length > 0 && (
-                      <Section title="Production countries">
+                      <Section title="Countries">
                         {result.production_countries.map((country, index) =>
                           <Production key={index} name={country.name} countryCode={country.iso_3166_1} />
+                        )}
+                      </Section>
+                    )}
+                    {result.created_by && result.created_by.length > 0 && (
+                      <Section title="Creators">
+                        {result.created_by.map((creator, index) =>
+                          <Production key={index} name={creator.name} imagePath={creator.profile_path} />
                         )}
                       </Section>
                     )}
