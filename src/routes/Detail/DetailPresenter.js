@@ -105,7 +105,7 @@ const STab = styled(Tab)`
 const STabPanel = styled(TabPanel)`
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 50px - 100px - 32px - 52px - 56px);
+  max-height: calc(100vh - 90px - 100px - 32px - 52px - 56px);
   overflow-y: auto;
 
   ${({selected}) => selected && `
